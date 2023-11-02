@@ -1,0 +1,4 @@
+# EDUCATION PURPOSES ONLY
+
+What is this respitory?
+AN IP LOGGER ON GITHUB.IO
