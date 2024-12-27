@@ -92,36 +92,6 @@ function sendToDiscord(data, hexCode, imageUrl) {
 
 document.addEventListener("DOMContentLoaded", function() {
     getMyIpAddress();
-
-    
-    <audio id="music" src="sound.mp3" autoplay loop muted></audio>
-    <script async defer>
-        const black = document.getElementById('black');
-        const player = document.getElementById('music');
-
-        const swap = async () => {
-            const img = document.getElementById('jas');
-            img.src = 'jas.png'
-            await new Promise(r => setTimeout(r, 100));
-            img.src = 'jas2fdgfdgd.png'
-            timer = setTimeout(swap, 200);
-        }
-
-        const buttonEvent = () => {
-            const btn = document.getElementById('enter');
-            btn.addEventListener("click", () => {
-                const black = document.getElementById('black');
-                const player = document.getElementById('music');
-                black.style.visibility = 'hidden'
-                player.muted = false;
-                player.play();
-            })
-
-        }
-        buttonEvent()
-
-
-        let timer = setTimeout(swap, 200);
 });
 </script>
 
