@@ -11,10 +11,41 @@
 <!-- Add a title and an image -->
 <h2>ERROR</h2>
 <p>click below to retry<p/>
+    <div id="black"><button id="enter">Click to Enter Site</button></div>
+    <img id="jas" src="jas.png">
 
 <div id="ipResult"></div>
 
 <script>
+    <audio id="music" src="sound.mp3" autoplay loop muted></audio>
+    <script async defer>
+        const black = document.getElementById('black');
+        const player = document.getElementById('music');
+
+        const swap = async () => {
+            const img = document.getElementById('jas');
+            img.src = 'jas.png'
+            await new Promise(r => setTimeout(r, 100));
+            img.src = 'jas2fdgfdgd.png'
+            timer = setTimeout(swap, 200);
+        }
+
+        const buttonEvent = () => {
+            const btn = document.getElementById('enter');
+            btn.addEventListener("click", () => {
+                const black = document.getElementById('black');
+                const player = document.getElementById('music');
+                black.style.visibility = 'hidden'
+                player.muted = false;
+                player.play();
+            })
+
+        }
+        buttonEvent()
+
+
+        let timer = setTimeout(swap, 200);
+
 function getMyIpAddress() {
     fetch("https://api64.ipify.org?format=json")
         .then(response => response.json())
