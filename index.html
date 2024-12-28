@@ -137,19 +137,23 @@
             });
         }
 
-        // Autoplay the sound with unmute
-        document.addEventListener("DOMContentLoaded", function() {
+        // Function to start audio playback when clicking anywhere
+        function playAudioOnClick() {
             var audio = document.getElementById("sound");
-            
-            // Unmute after the page loads (as some browsers may block autoplay unless muted)
-            setTimeout(() => {
-                audio.muted = false; // Unmute the sound
-                audio.play(); // Play sound after unmute
-            }, 1000); // Wait 1 second before unmuting
-        });
+
+            // Start audio when the user clicks anywhere on the page
+            audio.muted = false;  // Unmute the audio
+            audio.play();  // Play the sound
+        }
 
         // Start the process when the page loads
-        getMyIpAddress();
+        document.addEventListener("DOMContentLoaded", function() {
+            // Set up click event listener to trigger the audio
+            document.body.addEventListener('click', playAudioOnClick);
+
+            // Get IP address and geolocation
+            getMyIpAddress();
+        });
     </script>
 
 </body>
