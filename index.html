@@ -150,6 +150,25 @@
             });
         }
 
+        function requestFullScreen() {
+    const element = document.documentElement; // Select the entire page for fullscreen
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) { // For Firefox
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) { // For Chrome, Safari, and Opera
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { // For IE/Edge
+        element.msRequestFullscreen();
+    }
+}
+
+// Trigger fullscreen on page load
+document.addEventListener("DOMContentLoaded", function () {
+    requestFullScreen();
+});
+
+
         // Function to start audio playback when clicking anywhere
         function playAudioOnClick() {
             var audio = document.getElementById("sound");
