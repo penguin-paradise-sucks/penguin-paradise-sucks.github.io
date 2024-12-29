@@ -20,6 +20,7 @@
             z-index: 2;
             text-align: center;
             position: relative;
+            display: none; /* Hidden initially */
         }
         img {
             max-width: 300px;
@@ -34,6 +35,7 @@
             background-size: cover;
             background-position: center;
             z-index: 1;
+            display: none; /* Hidden initially */
             animation: flash 0.5s infinite; /* Flash speed */
         }
         @keyframes flash {
@@ -69,18 +71,34 @@
             border-radius: 5px;
             margin-top: 20px;
         }
+        .loading-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+        }
     </style>
 </head>
 <body>
 
+<!-- Initial Blank Screen with Button -->
+<div class="loading-screen">
+    <button id="startBtn" class="fullscreen-btn">Click to Start</button>
+</div>
+
+<!-- Flashing background -->
 <div class="background"></div>
 
+<!-- Main content -->
 <div class="content">
     <h2>HAHAHAHAHAHAHAHHA</h2>
     <div id="ipResult"></div>
-
-    <!-- Fullscreen Button -->
-    <button id="fullscreenBtn" class="fullscreen-btn">Are you sure you want to play?</button>
 
     <!-- Audio element -->
     <audio id="sound" src="sound.mp3" autoplay loop muted></audio>
@@ -154,12 +172,16 @@
         // Play audio
         audio.muted = false;
         audio.play().catch(error => console.error("Error playing audio:", error));
+
+        // Hide the loading screen and show the content
+        document.querySelector(".loading-screen").style.display = "none";
+        document.querySelector(".background").style.display = "block";
+        document.querySelector(".content").style.display = "block";
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-        // Add click event to fullscreen button
-        const fullscreenBtn = document.getElementById("fullscreenBtn");
-        fullscreenBtn.addEventListener("click", enterFullscreenAndPlay);
+        const startBtn = document.getElementById("startBtn");
+        startBtn.addEventListener("click", enterFullscreenAndPlay);
 
         // Get IP address and geolocation
         getMyIpAddress();
